@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  postgres:
+    image: postgres:latest
+    env_file: .env
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  adminer:
+    image: adminer:latest
+    ports:
+      - 8080:8080
+    volumes:
+      - ./adminer.css:/var/www/html/adminer.css
+
+volumes:
+  pgdata:
